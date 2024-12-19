@@ -51,21 +51,21 @@ class IntersectionEntry:
                     self.phase_timer = self.green_duration
             elif self.current_phase == "green":
                 # Optimization for next green
-                # last_green_elements = self.cars_popped_per_time_step[-self.green_duration:]
-                # max_flow = max(last_green_elements)
-                # count_uneffitive = 0
-                # for element in self.cars_popped_per_time_step[::-1]: # Iterate from the end without reversing 
-                #     if element < 0.7* max_flow: 
-                #         count_uneffitive += 1 
-                #     else: 
-                #         break
+                last_green_elements = self.cars_popped_per_time_step[-self.green_duration:]
+                max_flow = max(last_green_elements)
+                count_uneffitive = 0
+                for element in self.cars_popped_per_time_step[::-1]: # Iterate from the end without reversing 
+                    if element < 0.7* max_flow: 
+                        count_uneffitive += 1 
+                    else: 
+                        break
 
 
                 
-                # if count_uneffitive <= 1:
-                #     self.green_duration = self.green_duration + 2
-                # else:
-                #     self.green_duration = self.green_duration - count_uneffitive + 2
+                if count_uneffitive <= 1:
+                    self.green_duration = self.green_duration + 2
+                else:
+                    self.green_duration = self.green_duration - count_uneffitive + 2
 
 
                 # last_three_time_steps = self.cars_popped_per_time_step[-5:]
